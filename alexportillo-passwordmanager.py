@@ -6,14 +6,16 @@ RED = "\033[91m"
 # clears the screen for a cleaner menu and steps through it
 CLEAR = "\033c"
 
+# variables used for storing employee credentials
 website1 = ''
 emailuser = ''
 pword = ''
 
+f = open("totallynotpii.txt", "a")
+
 
 def save_credentials(website1, emailuser, pword):
-    f = open("totallynotpii.txt", "a")
-    f.write(website1 + "," + emailuser + "," + pword + "\n")
+    f.write(website1 + "\t" + emailuser + "\t" + pword + "\n")
 
 # Prints the title of the program for the company
 print(CLEAR)
@@ -32,15 +34,16 @@ while choice != 'q':
     # Ask for the user's choice.
     choice = input("\nMake your choice: ").lower().strip()
     
-    # Respond to the user's choice.
+    # process for the 'add credentials' feature
     if choice == 'a':
         website1 = input(CLEAR + "\nWhat website will you be saving?\n\n")
         emailuser = input(CLEAR + "\nEnter your Username/E-mail:\n\n")
         pword = input(CLEAR + "\nEnter your Password:\n\n")
         save_credentials(website1, emailuser, pword)
         print(CLEAR + GREEN + "Credentials saved." + RESET)
+    # process for the 'view credentials' feature
     elif choice == 'v':
-        print(CLEAR + "\nEnter …….\n")
+        
     elif choice == 'q':
         print("\nExiting Password Manager\n")
     else:
@@ -48,3 +51,4 @@ while choice != 'q':
         
 # Print a message when exiting the program.
 print(CLEAR + RED + "\n\n\n\nProgram exit." + RESET)
+
