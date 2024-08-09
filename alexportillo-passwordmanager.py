@@ -61,7 +61,7 @@ while choice != 'q':
     
     # Ask for the user's choice.
     choice = input("\nMake your choice: ").lower().strip()
-    
+
     # process for the 'add credentials' feature
     if choice == 'a':
         website1 = input(CLEAR + "\nWhat website will you be saving?\n\n")
@@ -75,9 +75,11 @@ while choice != 'q':
         print(CLEAR)
         # Opening the file in read mode
         with open('totallynotpii.txt', 'r') as file:
-            content = file.read()
-            print(decrypt(content))
-            input("Enter any key to return to Menu\n")
+            content = file.readlines()
+            for line in content:
+               encWebsite, encEmail, encPass = line.strip().split('\t')
+               print(decrypt(encWebsite), decrypt(encEmail), decrypt(encPass))
+            input("\nPress Enter to return to Menu\n")
             print(CLEAR)
     elif choice == 'q':
         print("\nExiting Password Manager\n")
