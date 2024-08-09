@@ -41,7 +41,7 @@ def main():
         elif action == "retrieve":
             resource = input("Enter website:\n")
             username = input("Enter username:\n")
-            password = retrieve_credentials(resource)
+            retrieve_credentials(password)
             print(f"username and password for {resource}: {username if username else 'Not found.'} {password if password else 'Not found'}")
         
         elif action == "exit":

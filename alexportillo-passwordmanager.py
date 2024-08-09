@@ -11,10 +11,21 @@ website1 = ''
 emailuser = ''
 pword = ''
 
-f = open("totallynotpii.txt", "a")
+# area designated for the encryption process
+clearText = "myPassword" 
+charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, " 
+encText = "".join([charSet [ (charSet.find(c)+3) % 95 ] for c in clearText]) 
+print(encText) 
+
+# area for decrypting the information
+clearText = "myPassword" 
+charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, " 
+encText = "".join([charSet [ (charSet.find(c)-3) % 95 ] for c in clearText]) 
+print(encText) 
 
 
 def save_credentials(website1, emailuser, pword):
+    f = open("totallynotpii.txt", "a")
     f.write(website1 + "\t" + emailuser + "\t" + pword + "\n")
 
 # Prints the title of the program for the company
@@ -43,7 +54,13 @@ while choice != 'q':
         print(CLEAR + GREEN + "Credentials saved." + RESET)
     # process for the 'view credentials' feature
     elif choice == 'v':
-        
+        print(CLEAR)
+        # Opening the file in read mode
+        with open('totallynotpii.txt', 'r') as file:
+            content = file.read()
+            print(content)
+            input("Enter any key to return to Menu\n")
+            print(CLEAR)
     elif choice == 'q':
         print("\nExiting Password Manager\n")
     else:
@@ -51,4 +68,3 @@ while choice != 'q':
         
 # Print a message when exiting the program.
 print(CLEAR + RED + "\n\n\n\nProgram exit." + RESET)
-
