@@ -15,9 +15,6 @@ pword = ''
 # area for the encryption process
 unEncText = "myPassword" 
 charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, " 
-encText = "".join([charSet [ (charSet.find(c)+3) % 95 ] for c in unEncText]) 
-print(encText) 
-
 def encrypt(text):
     encText = ""
     for char in text:
@@ -28,10 +25,6 @@ def encrypt(text):
     return encText
 
 # area for decrypting the information
-charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, "
-encText = "".join([charSet [ (charSet.find(c)-3) % 95 ] for c in unEncText]) 
-print(encText) 
-
 def decrypt(text):
     encText = ""
     for char in text:
