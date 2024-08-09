@@ -35,7 +35,7 @@ def decrypt(text):
     return encText
 
 def savecredentials(website1, emailuser, pword):
-    f = open("totallynotpii.txt", "a")
+    f = open("credentials.txt", "a")
     f.write(website1 + "\t" + emailuser + "\t" + pword + "\n")
 
 # Prints the title of the program for the company
@@ -67,7 +67,7 @@ while choice != 'q':
     elif choice == 'v':
         print(CLEAR)
         # Opening the file in read mode
-        with open('totallynotpii.txt', 'r') as file:
+        with open('credentials.txt', 'r') as file:
             content = file.readlines()
             for line in content:
                encWebsite, encEmail, encPass = line.strip().split('\t')
