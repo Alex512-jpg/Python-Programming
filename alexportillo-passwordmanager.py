@@ -11,20 +11,37 @@ website1 = ''
 emailuser = ''
 pword = ''
 
-# area designated for the encryption process
-clearText = "myPassword" 
+
+# area for the encryption process
+unEncText = "myPassword" 
 charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, " 
-encText = "".join([charSet [ (charSet.find(c)+3) % 95 ] for c in clearText]) 
+encText = "".join([charSet [ (charSet.find(c)+3) % 95 ] for c in unEncText]) 
 print(encText) 
+
+def encrypt(text):
+    encText = ""
+    for char in text:
+        originalIndex = charSet.find(char)
+        newIndex = (originalIndex + 3) % len(charSet)
+        encChar = charSet[newIndex]
+        encText += encChar
+    return encText
 
 # area for decrypting the information
-clearText = "myPassword" 
-charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, " 
-encText = "".join([charSet [ (charSet.find(c)-3) % 95 ] for c in clearText]) 
+charSet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`~!@#$%^&*()_-=|\\}]{[\"':;?/>.<, "
+encText = "".join([charSet [ (charSet.find(c)-3) % 95 ] for c in unEncText]) 
 print(encText) 
 
+def decrypt(text):
+    encText = ""
+    for char in text:
+        originalIndex = charSet.find(char)
+        newIndex = (originalIndex - 3) % len(charSet)
+        encChar = charSet[newIndex]
+        encText += encChar
+    return encText
 
-def save_credentials(website1, emailuser, pword):
+def savecredentials(website1, emailuser, pword):
     f = open("totallynotpii.txt", "a")
     f.write(website1 + "\t" + emailuser + "\t" + pword + "\n")
 
@@ -50,21 +67,22 @@ while choice != 'q':
         website1 = input(CLEAR + "\nWhat website will you be saving?\n\n")
         emailuser = input(CLEAR + "\nEnter your Username/E-mail:\n\n")
         pword = input(CLEAR + "\nEnter your Password:\n\n")
-        save_credentials(website1, emailuser, pword)
+        savecredentials(encrypt(website1), encrypt(emailuser), encrypt(pword))
         print(CLEAR + GREEN + "Credentials saved." + RESET)
+        
     # process for the 'view credentials' feature
     elif choice == 'v':
         print(CLEAR)
         # Opening the file in read mode
         with open('totallynotpii.txt', 'r') as file:
             content = file.read()
-            print(content)
+            print(decrypt(content))
             input("Enter any key to return to Menu\n")
             print(CLEAR)
     elif choice == 'q':
         print("\nExiting Password Manager\n")
     else:
-        print(YELLOW + "\nInvalid option, please try again.\n" + RESET)
+        print(CLEAR + YELLOW + "\nInvalid option, please try again.\n" + RESET)
         
 # Print a message when exiting the program.
 print(CLEAR + RED + "\n\n\n\nProgram exit." + RESET)
