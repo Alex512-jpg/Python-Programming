@@ -64,9 +64,9 @@ while choice != 'q':
 
     # process for the 'add credentials' feature
     if choice == 'a':
-        website1 = input(CLEAR + "\nWhat website will you be saving?\n\n")
-        emailuser = input(CLEAR + "\nEnter your Username/E-mail:\n\n")
-        pword = input(CLEAR + "\nEnter your Password:\n\n")
+        website1 = input(CLEAR + "\nWhat website will you be saving?\n\n").strip()
+        emailuser = input(CLEAR + "\nEnter your Username/E-mail:\n\n").strip()
+        pword = input(CLEAR + "\nEnter your Password:\n\n").strip()
         savecredentials(encrypt(website1), encrypt(emailuser), encrypt(pword))
         print(CLEAR + GREEN + "Credentials saved." + RESET)
         
