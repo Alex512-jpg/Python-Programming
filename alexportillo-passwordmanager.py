@@ -1,3 +1,5 @@
+import os
+
 # a set of colours used to visually distinct certain texts
 GREEN = "\033[92m"
 RESET = "\033[00m"
@@ -67,13 +69,17 @@ while choice != 'q':
     elif choice == 'v':
         print(CLEAR)
         # Opening the file in read mode
-        with open('credentials.txt', 'r') as file:
-            content = file.readlines() # add feature where you check if file is there and print a response if theres none
-            for line in content:
-               encWebsite, encEmail, encPass = line.strip().split('\t')
-               print(decrypt(encWebsite[:20]).center(25), decrypt(encEmail[:30]).center(35), decrypt(encPass[:20]).center(25))
-            input("\nPress Enter to return to Menu\n")
-            print(CLEAR)
+        if not os.path.isfile('credentials.txt'):
+            print(YELLOW + "No credentials saved." + RESET)
+            continue
+        else:
+            with open('credentials.txt', 'r') as file:
+                content = file.readlines()
+                for line in content:
+                    encWebsite, encEmail, encPass = line.strip().split('\t')
+                    print(decrypt(encWebsite[:20]).center(25), decrypt(encEmail[:30]).center(35), decrypt(encPass[:20]).center(25))
+                input("\nPress Enter to return to Menu\n")
+                print(CLEAR)
     elif choice == 'q':
         print("\nExiting Password Manager\n")
     else:
