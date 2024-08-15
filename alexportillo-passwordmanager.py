@@ -36,7 +36,7 @@ def decrypt(text):
 
 def savecredentials(website1, emailuser, pword):
     f = open("credentials.txt", "a")
-    f.write(website1 + "\t" + emailuser + "\t" + pword + "\n")
+    f.write((website1) + "\t" + emailuser + "\t" + pword + "\n")
 
 # Prints the title of the program for the company
 print(CLEAR)
@@ -68,10 +68,10 @@ while choice != 'q':
         print(CLEAR)
         # Opening the file in read mode
         with open('credentials.txt', 'r') as file:
-            content = file.readlines()
+            content = file.readlines() # add feature where you check if file is there and print a response if theres none
             for line in content:
                encWebsite, encEmail, encPass = line.strip().split('\t')
-               print(decrypt(encWebsite), decrypt(encEmail), decrypt(encPass))
+               print(decrypt(encWebsite[:20]).center(20), decrypt(encEmail[:30]).center(30), decrypt(encPass[:20]).center(20))
             input("\nPress Enter to return to Menu\n")
             print(CLEAR)
     elif choice == 'q':
