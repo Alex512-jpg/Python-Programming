@@ -71,7 +71,7 @@ while choice != 'q':
             content = file.readlines() # add feature where you check if file is there and print a response if theres none
             for line in content:
                encWebsite, encEmail, encPass = line.strip().split('\t')
-               print(decrypt(encWebsite[:20]).center(20), decrypt(encEmail[:30]).center(30), decrypt(encPass[:20]).center(20))
+               print(decrypt(encWebsite[:20]).center(25), decrypt(encEmail[:30]).center(35), decrypt(encPass[:20]).center(25))
             input("\nPress Enter to return to Menu\n")
             print(CLEAR)
     elif choice == 'q':
